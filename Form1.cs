@@ -27,7 +27,9 @@ namespace WindowsFormsApp3
 		int count = 0;
 		private async void button2_Click(object sender, EventArgs e)
 		{
-			var stopwatch = new Stopwatch();
+            button2.Hide();
+
+            var stopwatch = new Stopwatch();
 			stopwatch.Start();
 			con.Open();
 			label1.Text = "В процессе...";
@@ -37,7 +39,8 @@ namespace WindowsFormsApp3
 			con.Close();
 			stopwatch.Stop();
 			label1.Text = $"Завершено. Обработано {count} строк | Прошло {stopwatch.Elapsed}";
-		}
+            button2.Show();
+        }
 
 		private async Task InsertAsync(string pathfile)
 		{
@@ -48,8 +51,8 @@ namespace WindowsFormsApp3
 				{
 					await Task.Run(async () =>
 					{
-						using (MySqlCommand cmd = new MySqlCommand("INSERT INTO infotable(ip,unk1,unk2,date_t,zapros,res,raz,unk3,ustroystvo,unk4)"
-						+ "VALUES(@ip,@unk1,@unk2,@date_t,@zapros,@res,@raz,@unk3,@ustroystvo,@unk4)", con))
+						using (MySqlCommand cmd = new MySqlCommand("INSERT INTO infotable_23062(ip,unk1,unk2,date_t,zapros,res,raz,unk3,ustroystvo,unk4)"
+                        + "VALUES(@ip,@unk1,@unk2,@date_t,@zapros,@res,@raz,@unk3,@ustroystvo,@unk4)", con))
 						{
 							try
 							{
